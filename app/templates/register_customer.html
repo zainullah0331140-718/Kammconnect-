@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="auth-wrap">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-10 col-xl-9">
+        <div class="auth-card">
+          <div class="row g-0">
+            <div class="col-md-5 d-none d-md-block">
+              <div class="auth-aside h-100 d-flex flex-column">
+                <div class="mb-4">
+                  <span class="eyebrow text-warning">Customer account</span>
+                  <h2 class="h2">Find help with confidence.</h2>
+                  <p class="mb-0">Save providers, compare services, and share honest reviews after the work is done.</p>
+                </div>
+                <ul class="list-unstyled small mt-auto mb-0">
+                  <li class="mb-3"><i class="bi bi-heart me-2"></i>Save trusted providers</li>
+                  <li class="mb-3"><i class="bi bi-star me-2"></i>Write reviews after verification</li>
+                  <li><i class="bi bi-flag me-2"></i>Report problems to moderators</li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-md-7">
+              <div class="p-4 p-lg-5">
+                <h1 class="h3 mb-1">Create a customer account</h1>
+                <p class="text-muted mb-4">Already registered? <a href="/login">Log in</a>. Are you a professional? <a href="/register/provider">Create a provider account</a>.</p>
+                <form id="customerRegisterForm" novalidate>
+                  <div class="alert alert-danger d-none form-error" role="alert"></div>
+                  <div class="mb-3">
+                    <label class="form-label" for="customerName">Full name</label>
+                    <input class="form-control" id="customerName" name="full_name" type="text" autocomplete="name" maxlength="150" required>
+                    <div class="invalid-feedback js-error d-none"></div>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label" for="customerEmail">Email address</label>
+                    <input class="form-control" id="customerEmail" name="email" type="email" autocomplete="email" required>
+                    <div class="invalid-feedback js-error d-none"></div>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label" for="customerPhone">Phone <span class="text-muted fw-normal">(optional)</span></label>
+                    <input class="form-control" id="customerPhone" name="phone" type="tel" autocomplete="tel" maxlength="30" placeholder="e.g. 03001234567">
+                    <div class="invalid-feedback js-error d-none"></div>
+                  </div>
+                  <div class="row g-3">
+                    <div class="col-sm-6">
+                      <label class="form-label" for="customerPassword">Password</label>
+                      <input class="form-control" id="customerPassword" name="password" type="password" autocomplete="new-password" required>
+                      <div class="invalid-feedback js-error d-none"></div>
+                    </div>
+                    <div class="col-sm-6">
+                      <label class="form-label" for="customerPasswordConfirm">Confirm password</label>
+                      <input class="form-control" id="customerPasswordConfirm" name="password_confirm" type="password" autocomplete="new-password" required>
+                      <div class="invalid-feedback js-error d-none"></div>
+                    </div>
+                  </div>
+                  <p class="form-text mt-2">Use at least 8 characters with uppercase, lowercase, and a number.</p>
+                  <div class="form-check mb-3">
+                    <input class="form-check-input" type="checkbox" id="customerTerms" required>
+                    <label class="form-check-label small" for="customerTerms">I agree to the <a href="/terms">terms of service</a> and <a href="/privacy">privacy policy</a>.</label>
+                  </div>
+                  <button class="btn btn-brand w-100" type="submit">Create account</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+{% block scripts %}
+<script src="/static/js/auth.js"></script>
+{% endblock %}

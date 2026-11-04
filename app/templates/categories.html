@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="page-hero">
+  <div class="container">
+    <div class="d-flex flex-wrap justify-content-between align-items-end gap-3">
+      <div>
+        <span class="eyebrow">Browse services</span>
+        <h1 class="display-6 fw-bold mb-2">Service categories</h1>
+        <p class="text-muted mb-0 col-lg-7">Explore the kinds of local help available on KaamConnect. Each category links to provider search results.</p>
+      </div>
+      <a class="btn btn-brand d-none" data-role-only="admin" href="/admin/categories">
+        <i class="bi bi-plus-lg me-1"></i>Manage categories
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="container py-5">
+  <div class="row g-4" id="categoryGrid" aria-live="polite">
+    <div class="col-12"><div class="text-muted">Loading categories…</div></div>
+  </div>
+  <div class="card-soft p-4 p-lg-5 mt-5">
+    <div class="row align-items-center g-4">
+      <div class="col-lg-8">
+        <h2 class="h3 mb-2">Can’t find the right category?</h2>
+        <p class="text-muted mb-0">Search by keyword or business name instead. Providers describe the specific services they offer on their profiles.</p>
+      </div>
+      <div class="col-lg-4 text-lg-end">
+        <a class="btn btn-brand" href="/search">Search all providers</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="/static/js/categories.js"></script>
+{% endblock %}

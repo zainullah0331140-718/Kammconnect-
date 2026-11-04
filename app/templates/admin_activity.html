@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow">Administration</span>
+    <h1 class="display-6 fw-bold mb-1">Activity log</h1>
+    <p class="text-muted mb-0">Every login and administrative action across the platform, newest first.</p>
+  </div>
+</section>
+<div class="container py-4 py-lg-5">
+  <div class="admin-shell">
+    {% include "_admin_nav.html" %}
+    <div>
+      <div id="adminActivityAlert"></div>
+      <form class="card-soft p-3 mb-3" id="activityFilterForm">
+        <div class="row g-2 align-items-end">
+          <div class="col-md-5">
+            <label class="form-label" for="activityActionFilter">Action</label>
+            <input class="form-control" id="activityActionFilter" name="action" type="search" placeholder="e.g. auth.login, review.update" list="activityActionOptions">
+            <datalist id="activityActionOptions">
+              <option value="auth.login">Logins</option>
+              <option value="user.delete_self">Self-deleted accounts</option>
+              <option value="admin.user.delete">Users deleted by admin</option>
+              <option value="admin.user.update">Users updated by admin</option>
+              <option value="provider.verification">Provider verification</option>
+              <option value="review.moderate">Review moderation</option>
+              <option value="complaint.update">Complaint updates</option>
+              <option value="advertisement.moderate">Advertisement moderation</option>
+            </datalist>
+          </div>
+          <div class="col-md-4 d-flex gap-2">
+            <button class="btn btn-brand flex-grow-1" type="submit">Filter</button>
+            <button class="btn btn-outline-secondary" type="button" id="clearActivityFilters">Clear</button>
+          </div>
+        </div>
+      </form>
+      <div class="table-card">
+        <div class="table-responsive">
+          <table class="table align-middle">
+            <thead><tr><th>When</th><th>Actor</th><th>Action</th><th>Entity</th><th>IP</th><th>Details</th></tr></thead>
+            <tbody id="adminActivityBody"><tr><td colspan="6" class="text-muted p-4">Loading activity…</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+      <p class="small text-muted mt-3 mb-0" id="adminActivityCount"></p>
+      <nav class="mt-3" id="adminActivityPagination" aria-label="Activity pages"></nav>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="/static/js/admin.js"></script>
+{% endblock %}

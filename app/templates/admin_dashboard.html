@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="page-hero">
+  <div class="container">
+    <div class="d-flex flex-wrap justify-content-between align-items-end gap-3">
+      <div>
+        <span class="eyebrow">Administration</span>
+        <h1 class="display-6 fw-bold mb-1">Platform overview</h1>
+        <p class="text-muted mb-0">Monitor activity and work through pending moderation tasks.</p>
+      </div>
+      <a class="btn btn-brand" href="/admin/categories">
+        <i class="bi bi-plus-lg me-1"></i>Manage categories
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="container py-4 py-lg-5">
+  <div class="admin-shell">
+    {% include "_admin_nav.html" %}
+    <div>
+      <div id="adminDashboardAlert"></div>
+      <div class="row g-3 mb-4">
+        <div class="col-6 col-xl-3"><div class="stat-card"><div class="text-muted small">Total users</div><div class="stat-value" data-stat="total_users">—</div><div class="small text-muted"><span data-stat="total_customers">—</span> customers · <span data-stat="total_providers">—</span> providers</div></div></div>
+        <div class="col-6 col-xl-3"><div class="stat-card"><div class="text-muted small">Verified providers</div><div class="stat-value" data-stat="verified_providers">—</div><div class="small text-muted"><span data-stat="pending_providers">—</span> pending · <span data-stat="rejected_providers">—</span> rejected</div></div></div>
+        <div class="col-6 col-xl-3"><div class="stat-card"><div class="text-muted small">Pending reviews</div><div class="stat-value" data-stat="pending_reviews">—</div><div class="small text-muted"><a href="/admin/reviews?status=pending">Moderate reviews</a></div></div></div>
+        <div class="col-6 col-xl-3"><div class="stat-card"><div class="text-muted small">Open complaints</div><div class="stat-value" data-stat="open_complaints">—</div><div class="small text-muted"><a href="/admin/complaints?status=open">Review complaints</a></div></div></div>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-xl-6">
+          <div class="card-soft h-100">
+            <div class="d-flex justify-content-between align-items-center p-4 pb-3">
+              <h2 class="h5 mb-0"><i class="bi bi-hourglass-split me-2 text-brand"></i>Pending verification</h2>
+              <a class="small" href="/admin/verification?status=pending">View all</a>
+            </div>
+            <div id="pendingProviders" class="px-4 pb-4"><div class="text-muted small">Loading…</div></div>
+          </div>
+        </div>
+        <div class="col-xl-6">
+          <div class="card-soft h-100">
+            <div class="d-flex justify-content-between align-items-center p-4 pb-3">
+              <h2 class="h5 mb-0"><i class="bi bi-flag me-2 text-brand"></i>Open complaints</h2>
+              <a class="small" href="/admin/complaints?status=open">View all</a>
+            </div>
+            <div id="openComplaints" class="px-4 pb-4"><div class="text-muted small">Loading…</div></div>
+          </div>
+        </div>
+        <div class="col-xl-6">
+          <div class="card-soft h-100">
+            <div class="d-flex justify-content-between align-items-center p-4 pb-3">
+              <h2 class="h5 mb-0"><i class="bi bi-star me-2 text-brand"></i>Pending reviews</h2>
+              <a class="small" href="/admin/reviews?status=pending">View all</a>
+            </div>
+            <div id="pendingReviews" class="px-4 pb-4"><div class="text-muted small">Loading…</div></div>
+          </div>
+        </div>
+        <div class="col-xl-6">
+          <div class="card-soft h-100">
+            <div class="d-flex justify-content-between align-items-center p-4 pb-3">
+              <h2 class="h5 mb-0"><i class="bi bi-megaphone me-2 text-brand"></i>Pending advertisements</h2>
+              <a class="small" href="/admin/advertisements?status=pending">View all</a>
+            </div>
+            <div id="pendingAds" class="px-4 pb-4"><div class="text-muted small">Loading…</div></div>
+          </div>
+        </div>
+        <div class="col-xl-6">
+          <div class="card-soft h-100">
+            <div class="d-flex justify-content-between align-items-center p-4 pb-3">
+              <h2 class="h5 mb-0"><i class="bi bi-box-arrow-in-right me-2 text-brand"></i>Recent logins</h2>
+              <a class="small" href="/admin/activity?action=auth.login">View all</a>
+            </div>
+            <div id="recentLogins" class="px-4 pb-4"><div class="text-muted small">Loading logins…</div></div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="card-soft p-4">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h2 class="h5 mb-0"><i class="bi bi-journal-text me-2 text-brand"></i>Recent audit activity</h2>
+              <a class="small" href="/admin/activity">View all</a>
+            </div>
+            <div id="recentAudit"><div class="text-muted small">Loading activity…</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="/static/js/admin.js"></script>
+{% endblock %}

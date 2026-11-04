@@ -1,0 +1,216 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow">Account settings</span>
+    <h1 class="display-6 fw-bold mb-1">Edit your profile</h1>
+    <p class="text-muted mb-0">Keep your account and public provider details accurate.</p>
+  </div>
+</section>
+
+<div class="container py-4 py-lg-5">
+  <div class="row g-4 justify-content-center">
+    <div class="col-lg-8">
+      <form class="card-soft p-4 p-lg-5 mb-4" id="accountForm" novalidate>
+        <div class="d-flex align-items-center gap-3 mb-4">
+          <span class="avatar avatar-lg"><i class="bi bi-person"></i></span>
+          <div>
+            <h2 class="h4 mb-1">Account details</h2>
+            <p class="text-muted small mb-0">Your email and role cannot be changed here.</p>
+          </div>
+        </div>
+        <div class="alert alert-danger d-none form-error" role="alert"></div>
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label class="form-label" for="accountName">Full name</label>
+            <input class="form-control" id="accountName" name="full_name" type="text" maxlength="150" required>
+            <div class="invalid-feedback js-error d-none"></div>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label" for="accountPhone">Phone number</label>
+            <input class="form-control" id="accountPhone" name="phone" type="tel" maxlength="30">
+            <div class="invalid-feedback js-error d-none"></div>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label" for="accountEmail">Email address</label>
+            <input class="form-control" id="accountEmail" type="email" disabled>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label" for="accountRole">Account type</label>
+            <input class="form-control" id="accountRole" type="text" disabled>
+          </div>
+        </div>
+        <div class="mt-4 d-flex justify-content-end">
+          <button class="btn btn-brand" type="submit">Save account details</button>
+        </div>
+      </form>
+
+      <form class="card-soft p-4 p-lg-5 mb-4" id="accountImageForm" novalidate>
+        <div class="d-flex flex-wrap align-items-center gap-3">
+          <img class="avatar avatar-lg" id="accountImagePreview" src="/static/images/avatar.svg" alt="Your profile photo">
+          <div class="flex-grow-1">
+            <h2 class="h4 mb-1">Profile photo</h2>
+            <p class="text-muted small mb-2">Shown in the top menu. JPG, PNG, GIF, or WebP, up to 2 MB.</p>
+            <input class="form-control" id="accountImage" name="file" type="file" accept="image/jpeg,image/png,image/gif,image/webp">
+            <div class="form-text">Providers can also upload a public business image below.</div>
+          </div>
+          <button class="btn btn-outline-brand" type="submit">Upload photo</button>
+        </div>
+      </form>
+
+      <form class="card-soft p-4 p-lg-5 mb-4" id="passwordForm" novalidate>
+        <div class="d-flex align-items-center gap-3 mb-4">
+          <span class="avatar avatar-lg"><i class="bi bi-shield-lock"></i></span>
+          <div>
+            <h2 class="h4 mb-1">Change password</h2>
+            <p class="text-muted small mb-0">Choose a new password. Other sessions will be signed out.</p>
+          </div>
+        </div>
+        <div class="alert alert-danger d-none form-error" role="alert"></div>
+        <div class="row g-3">
+          <div class="col-12">
+            <label class="form-label" for="currentPassword">Current password</label>
+            <input class="form-control" id="currentPassword" name="current_password" type="password" autocomplete="current-password" maxlength="128" required>
+            <div class="invalid-feedback js-error d-none"></div>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label" for="newPassword">New password</label>
+            <input class="form-control" id="newPassword" name="new_password" type="password" autocomplete="new-password" minlength="8" maxlength="128" required>
+            <div class="form-text">At least 8 characters with one letter and one number.</div>
+            <div class="invalid-feedback js-error d-none"></div>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label" for="confirmNewPassword">Confirm new password</label>
+            <input class="form-control" id="confirmNewPassword" name="new_password_confirm" type="password" autocomplete="new-password" minlength="8" maxlength="128" required>
+            <div class="invalid-feedback js-error d-none"></div>
+          </div>
+        </div>
+        <div class="mt-4 d-flex justify-content-end">
+          <button class="btn btn-brand" type="submit">Update password</button>
+        </div>
+      </form>
+
+      <div id="providerProfileSection" class="d-none">
+        <form class="card-soft p-4 p-lg-5 mb-4" id="providerProfileForm" novalidate>
+          <div class="d-flex justify-content-between align-items-start gap-3 mb-4">
+            <div>
+              <h2 class="h4 mb-1">Public business profile</h2>
+              <p class="text-muted small mb-0">This information appears on your public provider page.</p>
+            </div>
+            <span id="profileVerification"></span>
+          </div>
+          <div class="alert alert-danger d-none form-error" role="alert"></div>
+          <div class="row g-3">
+            <div class="col-md-7">
+              <label class="form-label" for="profileBusinessName">Business name</label>
+              <input class="form-control" id="profileBusinessName" name="business_name" type="text" maxlength="180" required>
+              <div class="invalid-feedback js-error d-none"></div>
+            </div>
+            <div class="col-md-5">
+              <label class="form-label" for="profileExperience">Years of experience</label>
+              <input class="form-control" id="profileExperience" name="experience_years" type="number" min="0" max="80">
+              <div class="invalid-feedback js-error d-none"></div>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label" for="profileCity">City</label>
+              <input class="form-control" id="profileCity" name="city" type="text" maxlength="100" required>
+              <div class="invalid-feedback js-error d-none"></div>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label" for="profileArea">Area</label>
+              <input class="form-control" id="profileArea" name="area" type="text" maxlength="100">
+              <div class="invalid-feedback js-error d-none"></div>
+            </div>
+            <div class="col-12">
+              <label class="form-label" for="profileAddress">Address</label>
+              <input class="form-control" id="profileAddress" name="address" type="text" maxlength="255">
+              <div class="invalid-feedback js-error d-none"></div>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label" for="profileContactPhone">Public contact phone</label>
+              <input class="form-control" id="profileContactPhone" name="contact_phone" type="tel" maxlength="30">
+              <div class="invalid-feedback js-error d-none"></div>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label" for="profileWhatsapp">WhatsApp number</label>
+              <input class="form-control" id="profileWhatsapp" name="whatsapp_number" type="tel" maxlength="30">
+              <div class="invalid-feedback js-error d-none"></div>
+            </div>
+            <div class="col-12">
+              <label class="form-label" for="profileDescription">Description</label>
+              <textarea class="form-control" id="profileDescription" name="description" rows="5" maxlength="5000" placeholder="Describe your skills, typical jobs, and what customers can expect."></textarea>
+              <div class="invalid-feedback js-error d-none"></div>
+            </div>
+          </div>
+          <div class="mt-4 d-flex justify-content-end">
+            <button class="btn btn-brand" type="submit">Save business profile</button>
+          </div>
+        </form>
+
+        <form class="card-soft p-4 p-lg-5" id="profileImageForm" novalidate>
+          <h2 class="h4 mb-1">Profile image</h2>
+          <p class="text-muted small">JPG, PNG, or WebP up to 2 MB. Images are validated before storage.</p>
+          <div class="d-flex flex-wrap align-items-center gap-3">
+            <img class="provider-avatar" id="profileImagePreview" src="/static/images/avatar.svg" alt="Current profile image">
+            <div class="flex-grow-1">
+              <label class="form-label" for="profileImage">Choose an image</label>
+              <input class="form-control" id="profileImage" name="file" type="file" accept="image/jpeg,image/png,image/webp">
+              <div class="form-text">A clear photo or business logo helps customers recognise you.</div>
+            </div>
+            <button class="btn btn-outline-brand" type="submit">Upload image</button>
+          </div>
+        </form>
+
+        <form class="card-soft p-4 p-lg-5 mt-4" id="workImagesForm" novalidate>
+          <div class="d-flex flex-wrap justify-content-between align-items-start gap-2">
+            <div>
+              <h2 class="h4 mb-1">Work photos</h2>
+              <p class="text-muted small mb-0">Show up to 5 photos of work you have completed. JPG, PNG, or WebP, up to 2 MB each.</p>
+            </div>
+            <span class="badge badge-neutral" id="workImagesCount">0 / 5</span>
+          </div>
+          <div class="alert alert-danger d-none form-error mt-3" role="alert"></div>
+          <div class="work-gallery mt-3" id="workImagesGrid"></div>
+          <p class="small text-muted mt-3 d-none" id="workImagesEmpty">No work photos yet. Add photos of jobs you have completed.</p>
+          <div class="row g-2 align-items-end mt-3">
+            <div class="col-md-8">
+              <label class="form-label" for="workImagesInput">Add photos</label>
+              <input class="form-control" id="workImagesInput" name="files" type="file" accept="image/jpeg,image/png,image/webp" multiple>
+              <div class="form-text">You can select more than one photo at a time.</div>
+            </div>
+            <div class="col-md-4">
+              <button class="btn btn-outline-brand w-100" type="submit">Upload photos</button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="card border-danger-subtle p-4 p-lg-5 mt-4" id="deleteAccountSection">
+        <div class="d-flex align-items-center gap-3 mb-3">
+          <span class="avatar avatar-lg text-danger"><i class="bi bi-trash"></i></span>
+          <div>
+            <h2 class="h4 mb-1 text-danger">Delete account</h2>
+            <p class="text-muted small mb-0">Permanently delete your account and all related data. This cannot be undone.</p>
+          </div>
+        </div>
+        <form id="deleteAccountForm" novalidate>
+          <div class="alert alert-danger d-none form-error" role="alert"></div>
+          <div class="mb-3">
+            <label class="form-label" for="deleteAccountPassword">Confirm your password</label>
+            <input class="form-control" id="deleteAccountPassword" name="password" type="password" autocomplete="current-password" maxlength="128" required>
+            <div class="invalid-feedback js-error d-none"></div>
+          </div>
+          <div class="form-check mb-3">
+            <input class="form-check-input" id="deleteAccountConfirm" type="checkbox">
+            <label class="form-check-label" for="deleteAccountConfirm">I understand this permanently deletes my account, reviews, favorites, complaints, and provider data.</label>
+          </div>
+          <button class="btn btn-danger" type="submit">Delete my account</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="/static/js/profile.js"></script>
+{% endblock %}

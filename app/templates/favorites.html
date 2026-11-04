@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow">Your shortlist</span>
+    <h1 class="display-6 fw-bold mb-1">Saved providers</h1>
+    <p class="text-muted mb-0">Keep trusted professionals close at hand for future jobs.</p>
+  </div>
+</section>
+
+<div class="container py-4 py-lg-5">
+  <div id="favoritesAlert"></div>
+  <div class="row g-4" id="favoritesGrid" aria-live="polite">
+    <div class="col-12"><div class="text-muted">Loading saved providers…</div></div>
+  </div>
+  <div class="text-center mt-4">
+    <a class="btn btn-outline-brand" href="/search"><i class="bi bi-search me-1"></i> Find more providers</a>
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="/static/js/favorites.js"></script>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="page-hero">
+  <div class="container">
+    <div class="d-flex flex-wrap justify-content-between align-items-end gap-3">
+      <div>
+        <span class="eyebrow">Provider dashboard</span>
+        <h1 class="display-6 fw-bold mb-1" id="providerBusinessName">Your business</h1>
+        <p class="text-muted mb-2">Manage your public profile, services, and customer reviews.</p>
+        <div id="providerStatus"></div>
+      </div>
+      <div class="d-flex flex-wrap gap-2">
+        <a class="btn btn-outline-brand" href="/profile/edit"><i class="bi bi-person-gear me-1"></i> Edit profile</a>
+        <a class="btn btn-brand" href="/provider/services"><i class="bi bi-tools me-1"></i> Manage services</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container py-4 py-lg-5">
+  <div id="providerAlert"></div>
+  <div class="row g-3 mb-4">
+    <div class="col-6 col-lg-3"><div class="stat-card"><div class="text-muted small">Verification</div><div class="stat-value fs-5" data-stat="verification">—</div></div></div>
+    <div class="col-6 col-lg-3"><div class="stat-card"><div class="text-muted small">Average rating</div><div class="stat-value" data-stat="rating">—</div></div></div>
+    <div class="col-6 col-lg-3"><div class="stat-card"><div class="text-muted small">Services</div><div class="stat-value" data-stat="service_count">—</div></div></div>
+    <div class="col-6 col-lg-3"><div class="stat-card"><div class="text-muted small">Pending ads</div><div class="stat-value" data-stat="pending_ad_count">—</div></div></div>
+  </div>
+
+  <div class="row g-4">
+    <div class="col-lg-7">
+      <div class="card-soft p-4 h-100">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h2 class="h5 mb-0"><i class="bi bi-chat-square-text me-2 text-brand"></i>Recent customer reviews</h2>
+          <a class="small text-decoration-none" href="/reviews">View all</a>
+        </div>
+        <div id="providerReviews"><div class="text-muted small">Loading reviews…</div></div>
+      </div>
+    </div>
+    <div class="col-lg-5">
+      <div class="card-soft p-4 mb-4">
+        <h2 class="h5 mb-3"><i class="bi bi-person-vcard me-2 text-brand"></i>Profile snapshot</h2>
+        <div id="providerProfileSummary"><div class="text-muted small">Loading profile…</div></div>
+      </div>
+      <div class="card-soft p-4">
+        <h2 class="h5 mb-3"><i class="bi bi-megaphone me-2 text-brand"></i>Quick actions</h2>
+        <div class="d-grid gap-2">
+          <a class="btn btn-outline-brand" href="/advertisements">Manage advertisements</a>
+          <a class="btn btn-outline-brand" href="/profile/edit">Upload a profile image</a>
+          <a class="btn btn-outline-brand" href="/complaints">View complaints</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="/static/js/dashboard.js"></script>
+{% endblock %}

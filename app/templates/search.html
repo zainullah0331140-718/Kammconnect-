@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow">Find a provider</span>
+    <h1 class="display-6 fw-bold mb-2">Search local professionals</h1>
+    <p class="text-muted mb-0">Filter by service, location, rating, and verification status.</p>
+  </div>
+</section>
+
+<div class="container py-4 py-lg-5">
+  <div class="row g-4">
+    <aside class="col-lg-3">
+      <form class="search-sidebar" id="searchForm" aria-label="Provider filters">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h2 class="h6 mb-0">Filters</h2>
+          <button class="btn btn-link btn-sm p-0 text-decoration-none" type="button" id="clearFilters">Clear all</button>
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="filterQuery">Keyword</label>
+          <input class="form-control" id="filterQuery" name="q" type="search" placeholder="e.g. wiring, AC repair">
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="filterCategory">Category</label>
+          <select class="form-select" id="filterCategory" name="category">
+            <option value="">All categories</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="filterCity">City</label>
+          <select class="form-select" id="filterCity" name="city">
+            <option value="">All cities</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="filterArea">Area</label>
+          <select class="form-select" id="filterArea" name="area" disabled>
+            <option value="">All areas</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="filterRating">Minimum rating</label>
+          <select class="form-select" id="filterRating" name="min_rating">
+            <option value="0">Any rating</option>
+            <option value="3">3 stars &amp; above</option>
+            <option value="4">4 stars &amp; above</option>
+            <option value="4.5">4.5 stars &amp; above</option>
+          </select>
+        </div>
+        <div class="form-check form-switch mb-3">
+          <input class="form-check-input" type="checkbox" role="switch" id="filterVerified" name="verified" value="true">
+          <label class="form-check-label" for="filterVerified">Verified providers only</label>
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="filterSort">Sort by</label>
+          <select class="form-select" id="filterSort" name="sort">
+            <option value="rating">Highest rated</option>
+            <option value="newest">Newest</option>
+            <option value="name">Business name</option>
+          </select>
+        </div>
+        <button class="btn btn-brand w-100" type="submit"><i class="bi bi-funnel me-1"></i> Apply filters</button>
+      </form>
+    </aside>
+
+    <div class="col-lg-9">
+      <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+        <p class="text-muted mb-0" id="resultCount" aria-live="polite">Loading providers…</p>
+        <div class="d-flex align-items-center gap-2">
+          <label class="small text-muted mb-0" for="topSort">Sort</label>
+          <select class="form-select form-select-sm" id="topSort" aria-label="Sort providers">
+            <option value="rating">Highest rated</option>
+            <option value="newest">Newest</option>
+            <option value="name">Business name</option>
+          </select>
+        </div>
+      </div>
+      <div class="row g-4" id="searchResults" aria-live="polite">
+        <div class="col-12"><div class="text-muted">Loading providers…</div></div>
+      </div>
+      <nav class="mt-4" id="searchPagination" aria-label="Search results pages"></nav>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="/static/js/search.js"></script>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="error-page container text-center py-5">
+  <div class="error-code">500</div>
+  <h1 class="h2 mt-2">Something went wrong</h1>
+  <p class="text-muted col-lg-6 mx-auto">An unexpected error occurred. Please try again in a moment. If the problem continues, contact support.</p>
+  <div class="d-flex justify-content-center gap-2 mt-4">
+    <a class="btn btn-brand" href="/">Go home</a>
+    <button class="btn btn-outline-brand" type="button" data-action="reload">Try again</button>
+  </div>
+</section>
+{% endblock %}

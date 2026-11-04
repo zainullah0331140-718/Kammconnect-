@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+{% block body_class %}page-home{% endblock %}
+{% block content %}
+<section class="hero">
+  <div class="container position-relative">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-7">
+        <span class="eyebrow">Trusted local help, found faster</span>
+        <h1 class="display-4 fw-bold mb-3">Find the right professional for the job.</h1>
+        <p class="lead mb-4">Compare verified local providers, browse real service details, and connect directly — without the guesswork.</p>
+        <form class="hero-search" id="heroSearch" action="/search" method="get" role="search">
+          <div class="row g-2">
+            <div class="col-lg-5">
+              <label class="visually-hidden" for="heroQuery">What do you need help with?</label>
+              <input class="form-control" id="heroQuery" name="q" type="search" placeholder="Search a service or business" autocomplete="off">
+            </div>
+            <div class="col-6 col-lg-3">
+              <label class="visually-hidden" for="heroCategory">Category</label>
+              <select class="form-select" id="heroCategory" name="category">
+                <option value="">All categories</option>
+              </select>
+            </div>
+            <div class="col-6 col-lg-2">
+              <label class="visually-hidden" for="heroCity">City</label>
+              <select class="form-select" id="heroCity" name="city">
+                <option value="">All cities</option>
+              </select>
+            </div>
+            <div class="col-lg-2 d-grid">
+              <button class="btn btn-brand" type="submit"><i class="bi bi-search me-1"></i> Search</button>
+            </div>
+          </div>
+        </form>
+        <div class="hero-trust mt-4">
+          <span><i class="bi bi-patch-check-fill me-1"></i>Verification badges</span>
+          <span><i class="bi bi-star-fill me-1"></i>Community reviews</span>
+          <span><i class="bi bi-shield-check me-1"></i>Admin moderation</span>
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <div class="hero-collage" aria-hidden="true">
+          <img src="/static/images/hero.svg" alt="" class="img-fluid w-100">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="container section-pad-sm">
+  <div class="d-flex flex-wrap justify-content-between align-items-end gap-3 mb-4">
+    <div class="section-heading">
+      <span class="eyebrow">Popular services</span>
+      <h2 class="h1 mb-0">Start with a category</h2>
+    </div>
+    <a class="btn btn-outline-brand" href="/categories">All categories <i class="bi bi-arrow-right"></i></a>
+  </div>
+  <div class="row g-3" id="homeCategories" aria-live="polite">
+    <div class="col-12"><div class="text-muted">Loading categories…</div></div>
+  </div>
+</section>
+
+<section class="container section-pad-sm" id="featuredSection">
+  <div class="d-flex flex-wrap justify-content-between align-items-end gap-3 mb-4">
+    <div class="section-heading">
+      <span class="eyebrow">Verified professionals</span>
+      <h2 class="h1 mb-0">Top-rated providers</h2>
+      <p class="text-muted mb-0 mt-2">Providers who have completed platform verification and earned strong reviews.</p>
+    </div>
+    <a class="btn btn-outline-brand" href="/search?verified=true">Browse verified <i class="bi bi-arrow-right"></i></a>
+  </div>
+  <div class="row g-4" id="featuredProviders" aria-live="polite">
+    <div class="col-12"><div class="text-muted">Loading providers…</div></div>
+  </div>
+</section>
+
+<section class="container section-pad-sm" id="adSection" hidden>
+  <div class="d-flex justify-content-between align-items-end gap-3 mb-3">
+    <div>
+      <span class="eyebrow">Sponsored</span>
+      <h2 class="h3 mb-0">Featured services from providers</h2>
+    </div>
+  </div>
+  <div class="row g-3" id="homeAds"></div>
+</section>
+
+<section class="container section-pad-sm">
+  <div class="d-flex flex-wrap justify-content-between align-items-end gap-3 mb-4">
+    <div class="section-heading">
+      <span class="eyebrow">New on KaamConnect</span>
+      <h2 class="h1 mb-0">Recently joined providers</h2>
+    </div>
+    <a class="btn btn-outline-brand" href="/search?sort=newest">See all <i class="bi bi-arrow-right"></i></a>
+  </div>
+  <div class="row g-4" id="recentProviders" aria-live="polite">
+    <div class="col-12"><div class="text-muted">Loading providers…</div></div>
+  </div>
+</section>
+
+<section class="container section-pad">
+  <div class="card-soft p-4 p-lg-5">
+    <div class="row g-4 align-items-center">
+      <div class="col-lg-5">
+        <span class="eyebrow">Simple by design</span>
+        <h2 class="display-6 fw-bold">From search to conversation in minutes.</h2>
+        <p class="text-muted mb-0">KaamConnect keeps the process transparent: browse, compare, review, and contact. No account is needed to explore.</p>
+      </div>
+      <div class="col-lg-7">
+        <div class="row g-3">
+          <div class="col-sm-4">
+            <div class="stat-card h-100">
+              <span class="stat-icon mb-3"><i class="bi bi-search"></i></span>
+              <h3 class="h6">1. Search</h3>
+              <p class="text-muted small mb-0">Filter by category, city, rating, and verification status.</p>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="stat-card h-100">
+              <span class="stat-icon mb-3"><i class="bi bi-person-check"></i></span>
+              <h3 class="h6">2. Compare</h3>
+              <p class="text-muted small mb-0">Review service details, experience, pricing, and feedback.</p>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="stat-card h-100">
+              <span class="stat-icon mb-3"><i class="bi bi-chat-dots"></i></span>
+              <h3 class="h6">3. Connect</h3>
+              <p class="text-muted small mb-0">Call or message the provider directly to agree on the work.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="container pb-5">
+  <div class="ad-banner">
+    <div class="row align-items-center g-4">
+      <div class="col-lg-8">
+        <span class="eyebrow text-warning">For local professionals</span>
+        <h2 class="h1 mb-2">Turn your skills into a profile customers can trust.</h2>
+        <p class="mb-0 text-white-50">Create a free provider account, add your services, and request verification. Customers can find you by category and city.</p>
+      </div>
+      <div class="col-lg-4 text-lg-end">
+        <a class="btn btn-gold btn-lg" href="/register/provider">Join as a provider</a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+{% block scripts %}
+<script src="/static/js/home.js"></script>
+{% endblock %}

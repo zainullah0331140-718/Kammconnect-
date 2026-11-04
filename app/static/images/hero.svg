@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 420" role="img" aria-label="Illustration of a local service provider connecting with a customer">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity=".18"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity=".04"/>
+    </linearGradient>
+    <linearGradient id="card" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#f2f8f4"/>
+    </linearGradient>
+  </defs>
+  <rect x="15" y="15" width="490" height="390" rx="40" fill="url(#bg)" stroke="#fff" stroke-opacity=".18"/>
+  <circle cx="390" cy="92" r="42" fill="#c99a2e" opacity=".9"/>
+  <path d="M370 92l12 12 24-27" fill="none" stroke="#073d28" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="60" y="70" width="270" height="125" rx="22" fill="url(#card)"/>
+  <circle cx="105" cy="112" r="22" fill="#dcece3"/>
+  <circle cx="105" cy="106" r="9" fill="#7fae97"/>
+  <path d="M89 130c2-10 8-15 16-15s14 5 16 15" fill="#7fae97"/>
+  <rect x="142" y="94" width="130" height="11" rx="5.5" fill="#315a48"/>
+  <rect x="142" y="116" width="100" height="8" rx="4" fill="#a9c4b7"/>
+  <rect x="142" y="134" width="82" height="8" rx="4" fill="#c5dacf"/>
+  <rect x="82" y="158" width="98" height="17" rx="8.5" fill="#e7f2ec"/>
+  <rect x="98" y="241" width="320" height="141" rx="24" fill="url(#card)"/>
+  <rect x="120" y="266" width="76" height="76" rx="18" fill="#e7f2ec"/>
+  <path d="M145 305l12 12 24-28" fill="none" stroke="#0b5d3b" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="216" y="270" width="135" height="12" rx="6" fill="#315a48"/>
+  <rect x="216" y="294" width="105" height="8" rx="4" fill="#a9c4b7"/>
+  <rect x="216" y="312" width="150" height="8" rx="4" fill="#c5dacf"/>
+  <rect x="120" y="352" width="202" height="12" rx="6" fill="#e7f2ec"/>
+  <circle cx="420" cy="310" r="50" fill="#0b5d3b"/>
+  <path d="M402 328v-36l32 18-32 18z" fill="#fff"/>
+</svg>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="KaamConnect helps you find trusted local service providers and skilled professionals.">
+  <meta name="theme-color" content="#0b5d3b">
+  <title>{{ title }} | KaamConnect</title>
+  <link rel="icon" href="/static/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/vendor/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/static/vendor/bootstrap/bootstrap-icons.css">
+  <link rel="stylesheet" href="/static/css/style.css">
+  {% block head %}{% endblock %}
+</head>
+<body class="{% block body_class %}{% endblock %}" data-page="{{ page }}">
+  <a class="skip-link" href="#mainContent">Skip to main content</a>
+
+  <nav class="navbar navbar-expand-lg navbar-light site-navbar sticky-top" aria-label="Main navigation">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="/">
+        <img src="/static/images/logo.svg" alt="" width="40" height="40">
+        <span class="brand-word">Kaam<span>Connect</span></span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
+              aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link {% if page == 'search' %}active{% endif %}" href="/search">Find a provider</a></li>
+          <li class="nav-item"><a class="nav-link {% if page == 'categories' %}active{% endif %}" href="/categories">Categories</a></li>
+          <li class="nav-item"><a class="nav-link" href="/register/provider">Become a provider</a></li>
+        </ul>
+        <div class="d-flex align-items-center gap-2" id="navGuest">
+          <a class="btn btn-link text-decoration-none text-dark" href="/login">Log in</a>
+          <a class="btn btn-brand" href="/register">Sign up</a>
+        </div>
+        <div class="d-none align-items-center gap-2" id="navUser">
+          <div class="dropdown">
+            <button class="btn btn-user dropdown-toggle d-flex align-items-center gap-2" type="button"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+              <span class="avatar avatar-sm" data-user-avatar><i class="bi bi-person"></i></span>
+              <span class="text-start">
+                <span class="d-block small fw-semibold" data-user-name>Account</span>
+                <span class="d-block text-muted small-muted" data-user-role></span>
+              </span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end shadow-sm">
+              <li><a class="dropdown-item" href="#" data-dashboard-link><i class="bi bi-grid me-2"></i>Dashboard</a></li>
+              <li data-role-not="provider,admin"><a class="dropdown-item" href="/favorites"><i class="bi bi-heart me-2"></i>Favorites</a></li>
+              <li data-role-not="provider,admin"><a class="dropdown-item" href="/reviews"><i class="bi bi-star me-2"></i>My reviews</a></li>
+              <li data-role-not="provider,admin"><a class="dropdown-item" href="/complaints"><i class="bi bi-flag me-2"></i>Complaints</a></li>
+              <li data-role-only="provider"><a class="dropdown-item" href="/provider/services"><i class="bi bi-tools me-2"></i>My services</a></li>
+              <li data-role-only="provider"><a class="dropdown-item" href="/advertisements"><i class="bi bi-megaphone me-2"></i>My advertisements</a></li>
+              <li data-role-only="customer,provider"><a class="dropdown-item" href="/complaints"><i class="bi bi-flag me-2"></i>Complaints</a></li>
+              <li><a class="dropdown-item" href="/profile/edit"><i class="bi bi-person-gear me-2"></i>Edit profile</a></li>
+              <li><a class="dropdown-item text-danger" href="/profile/edit#deleteAccountSection"><i class="bi bi-trash me-2"></i>Delete account</a></li>
+              <li data-role-only="admin"><a class="dropdown-item" href="/admin"><i class="bi bi-speedometer2 me-2"></i>Admin panel</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><button class="dropdown-item text-danger" type="button" data-action="logout"><i class="bi bi-box-arrow-right me-2"></i>Log out</button></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main id="mainContent">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="site-footer mt-5">
+    <div class="container py-5">
+      <div class="row g-4">
+        <div class="col-lg-4">
+          <a class="d-inline-flex align-items-center gap-2 text-decoration-none mb-3" href="/">
+            <img src="/static/images/logo.svg" alt="" width="42" height="42">
+            <span class="brand-word brand-word-light">Kaam<span>Connect</span></span>
+          </a>
+          <p class="text-white-50 mb-3">Connecting customers with trusted local service providers — clearly, safely, and without the guesswork.</p>
+          <div class="d-flex gap-2">
+            <a class="social-link" href="mailto:zainullah0331140@gmail.com" aria-label="Email Zain Ullah"><i class="bi bi-envelope"></i></a>
+            <a class="social-link" href="tel:+923311403655" aria-label="Call 0331-14036-55"><i class="bi bi-telephone"></i></a>
+            <a class="social-link" href="https://github.com/zainullah0331140-718" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile"><i class="bi bi-github"></i></a>
+            <a class="social-link" href="https://linkedin.com/in/zain-ullah-352792402" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile"><i class="bi bi-linkedin"></i></a>
+            <a class="social-link" href="/complaints" aria-label="Submit a complaint"><i class="bi bi-flag"></i></a>
+          </div>
+        </div>
+        <div class="col-6 col-lg-2">
+          <h2 class="footer-heading">Explore</h2>
+          <ul class="list-unstyled footer-links">
+            <li><a href="/search">Find providers</a></li>
+            <li><a href="/categories">Categories</a></li>
+            <li><a href="/register/provider">Become a provider</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-lg-2">
+          <h2 class="footer-heading">Account</h2>
+          <ul class="list-unstyled footer-links">
+            <li><a href="/login">Log in</a></li>
+            <li><a href="/register">Create account</a></li>
+            <li><a href="/forgot-password">Forgot password</a></li>
+            <li><a href="/profile/edit">Edit profile</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4">
+          <h2 class="footer-heading">Trust &amp; safety</h2>
+          <p class="text-white-50 small mb-3">Verification badges reflect platform review, not a guarantee. Always agree on scope and price before work begins.</p>
+          <a class="btn btn-outline-light btn-sm" href="/complaints">Report a problem</a>
+        </div>
+      </div>
+      <hr class="border-white border-opacity-10 my-4">
+      <div class="d-flex flex-column flex-md-row justify-content-between gap-2 small text-white-50">
+        <span>&copy; 2026 KaamConnect. All rights reserved.</span>
+        <span class="d-flex gap-3">
+          <a href="/privacy">Privacy policy</a>
+          <a href="/terms">Terms of service</a>
+        </span>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast-container position-fixed bottom-0 end-0 p-3" id="toastContainer" aria-live="polite" aria-atomic="true"></div>
+
+  <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header border-0">
+          <h2 class="modal-title h5" id="confirmModalTitle">Please confirm</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body pt-0">
+          <p class="confirm-message mb-0"></p>
+        </div>
+        <div class="modal-footer border-0">
+          <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-danger confirm-yes">Confirm</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/vendor/bootstrap/bootstrap.bundle.min.js"></script>
+  <script src="/static/js/api.js"></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="page-hero">
+  <div class="container">
+    <div class="d-flex flex-wrap justify-content-between align-items-end gap-3">
+      <div>
+        <span class="eyebrow">Customer dashboard</span>
+        <h1 class="display-6 fw-bold mb-1">Welcome, <span id="dashboardName">there</span></h1>
+        <p class="text-muted mb-0">Keep track of saved providers, reviews, and any issues you have reported.</p>
+      </div>
+      <a class="btn btn-brand" href="/search"><i class="bi bi-search me-1"></i> Find a provider</a>
+    </div>
+  </div>
+</section>
+
+<div class="container py-4 py-lg-5">
+  <div class="row g-3 mb-4" id="customerStats">
+    <div class="col-6 col-lg-3"><div class="stat-card"><div class="text-muted small">Saved providers</div><div class="stat-value" data-stat="favorite_count">—</div></div></div>
+    <div class="col-6 col-lg-3"><div class="stat-card"><div class="text-muted small">Reviews written</div><div class="stat-value" data-stat="review_count">—</div></div></div>
+    <div class="col-6 col-lg-3"><div class="stat-card"><div class="text-muted small">Complaints</div><div class="stat-value" data-stat="complaint_count">—</div></div></div>
+    <div class="col-6 col-lg-3"><div class="stat-card"><div class="text-muted small">Open complaints</div><div class="stat-value" data-stat="open_complaint_count">—</div></div></div>
+  </div>
+
+  <div class="row g-4">
+    <div class="col-lg-7">
+      <div class="card-soft p-4 h-100">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h2 class="h5 mb-0"><i class="bi bi-heart me-2 text-brand"></i>Saved providers</h2>
+          <a class="small text-decoration-none" href="/favorites">View all</a>
+        </div>
+        <div id="customerFavorites" class="row g-3">
+          <div class="col-12 text-muted small">Loading favorites…</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-5">
+      <div class="card-soft p-4 h-100">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h2 class="h5 mb-0"><i class="bi bi-star me-2 text-brand"></i>Recent reviews</h2>
+          <a class="small text-decoration-none" href="/reviews">View all</a>
+        </div>
+        <div id="customerReviews">
+          <div class="text-muted small">Loading reviews…</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="card-soft p-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h2 class="h5 mb-0"><i class="bi bi-flag me-2 text-brand"></i>Recent complaints</h2>
+          <div class="d-flex gap-2">
+            <a class="small text-decoration-none" href="/complaints">View all</a>
+            <a class="btn btn-sm btn-outline-brand" href="/complaints">New complaint</a>
+          </div>
+        </div>
+        <div id="customerComplaints">
+          <div class="text-muted small">Loading complaints…</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="/static/js/dashboard.js"></script>
+{% endblock %}

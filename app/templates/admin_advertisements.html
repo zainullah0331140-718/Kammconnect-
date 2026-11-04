@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow">Administration</span>
+    <h1 class="display-6 fw-bold mb-1">Advertisement moderation</h1>
+    <p class="text-muted mb-0">Review provider advertisements, approve live campaigns, and record decisions.</p>
+  </div>
+</section>
+<div class="container py-4 py-lg-5">
+  <div class="admin-shell">
+    {% include "_admin_nav.html" %}
+    <div>
+      <div id="adminAdsAlert"></div>
+      <form class="card-soft p-3 mb-3" id="adFilterForm">
+        <div class="row g-2 align-items-end">
+          <div class="col-md-6">
+            <label class="form-label" for="adStatusFilter">Status</label>
+            <select class="form-select" id="adStatusFilter" name="status">
+              <option value="">All statuses</option>
+              <option value="pending">Pending</option>
+              <option value="approved">Approved</option>
+              <option value="rejected">Rejected</option>
+              <option value="expired">Expired</option>
+            </select>
+          </div>
+          <div class="col-md-6 d-flex gap-2">
+            <button class="btn btn-brand flex-grow-1" type="submit">Filter</button>
+            <button class="btn btn-outline-secondary" type="button" id="clearAdFilters">Clear</button>
+          </div>
+        </div>
+      </form>
+      <div class="table-card">
+        <div class="table-responsive">
+          <table class="table align-middle">
+            <thead><tr><th>Advertisement</th><th>Provider</th><th>Dates</th><th>Status</th><th class="text-end">Actions</th></tr></thead>
+            <tbody id="adminAdsBody"><tr><td colspan="5" class="text-muted p-4">Loading advertisements…</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+      <p class="small text-muted mt-3 mb-0" id="adminAdsCount"></p>
+      <nav class="mt-3" id="adminAdsPagination" aria-label="Advertisement pages"></nav>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="adModerationModal" tabindex="-1" aria-labelledby="adModerationTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <form id="adModerationForm">
+        <div class="modal-header">
+          <h2 class="modal-title h5" id="adModerationTitle">Moderate advertisement</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="alert alert-danger d-none form-error" role="alert"></div>
+          <input type="hidden" name="ad_id">
+          <p class="small text-muted" id="adModerationContext"></p>
+          <div class="mb-3">
+            <label class="form-label" for="adModerationStatus">Status</label>
+            <select class="form-select" id="adModerationStatus" name="status" required>
+              <option value="approved">Approved</option>
+              <option value="pending">Pending</option>
+              <option value="rejected">Rejected</option>
+              <option value="expired">Expired</option>
+            </select>
+            <div class="invalid-feedback js-error d-none"></div>
+          </div>
+          <div class="mb-0">
+            <label class="form-label" for="adModerationNote">Moderator note</label>
+            <textarea class="form-control" id="adModerationNote" name="note" rows="3" maxlength="500"></textarea>
+            <div class="invalid-feedback js-error d-none"></div>
+          </div>
+        </div>
+        <div class="modal-footer border-0">
+          <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-brand">Save decision</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="/static/js/admin.js"></script>
+{% endblock %}

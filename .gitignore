@@ -1,0 +1,42 @@
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+
+# Local databases and test artifacts
+*.db
+*.sqlite
+*.sqlite3
+test_*.db
+
+# User uploads must never be committed
+uploads/*
+!uploads/.gitkeep
+!uploads/ads/
+!uploads/ads/.gitkeep
+!uploads/profiles/
+!uploads/profiles/.gitkeep
+
+# Editors / OS
+.vscode/*
+!.vscode/settings.json
+!.vscode/launch.json
+.idea/
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log

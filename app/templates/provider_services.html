@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="page-hero">
+  <div class="container">
+    <div class="d-flex flex-wrap justify-content-between align-items-end gap-3">
+      <div>
+        <span class="eyebrow">Provider tools</span>
+        <h1 class="display-6 fw-bold mb-1">Manage your services</h1>
+        <p class="text-muted mb-0">Add the specific jobs you offer and the prices customers can expect.</p>
+      </div>
+      <button class="btn btn-brand" type="button" id="addServiceButton" data-bs-toggle="modal" data-bs-target="#serviceModal">
+        <i class="bi bi-plus-lg me-1"></i> Add service
+      </button>
+    </div>
+  </div>
+</section>
+
+<div class="container py-4 py-lg-5">
+  <div id="serviceAlert"></div>
+  <div class="table-card" id="servicesContainer">
+    <div class="p-4 text-muted">Loading services…</div>
+  </div>
+</div>
+
+<div class="modal fade" id="serviceModal" tabindex="-1" aria-labelledby="serviceModalTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <form id="serviceForm" novalidate>
+        <div class="modal-header">
+          <h2 class="modal-title h5" id="serviceModalTitle">Add service</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="alert alert-danger d-none form-error" role="alert"></div>
+          <input type="hidden" name="service_id">
+          <div class="row g-3">
+            <div class="col-md-7">
+              <label class="form-label" for="serviceTitle">Service title</label>
+              <input class="form-control" id="serviceTitle" name="title" type="text" maxlength="180" required>
+              <div class="invalid-feedback js-error d-none"></div>
+            </div>
+            <div class="col-md-5">
+              <label class="form-label" for="serviceCategory">Category</label>
+              <select class="form-select" id="serviceCategory" name="category_id" required>
+                <option value="">Choose a category</option>
+              </select>
+              <div class="invalid-feedback js-error d-none"></div>
+            </div>
+            <div class="col-12">
+              <label class="form-label" for="serviceDescription">Description</label>
+              <textarea class="form-control" id="serviceDescription" name="description" rows="3" maxlength="3000" placeholder="Explain what is included, typical job size, and any conditions."></textarea>
+              <div class="invalid-feedback js-error d-none"></div>
+            </div>
+            <div class="col-sm-6">
+              <label class="form-label" for="serviceMinPrice">Minimum price (Rs)</label>
+              <input class="form-control" id="serviceMinPrice" name="price_min" type="number" min="0" step="0.01">
+              <div class="invalid-feedback js-error d-none"></div>
+            </div>
+            <div class="col-sm-6">
+              <label class="form-label" for="serviceMaxPrice">Maximum price (Rs)</label>
+              <input class="form-control" id="serviceMaxPrice" name="price_max" type="number" min="0" step="0.01">
+              <div class="invalid-feedback js-error d-none"></div>
+            </div>
+            <div class="col-12">
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="serviceActive" name="is_active" checked>
+                <label class="form-check-label" for="serviceActive">Show this service on my public profile</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer border-0">
+          <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-brand">Save service</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="/static/js/services.js"></script>
+{% endblock %}

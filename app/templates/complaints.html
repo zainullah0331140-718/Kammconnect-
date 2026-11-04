@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="page-hero">
+  <div class="container">
+    <div class="d-flex flex-wrap justify-content-between align-items-end gap-3">
+      <div>
+        <span class="eyebrow">Support</span>
+        <h1 class="display-6 fw-bold mb-1">Complaints</h1>
+        <p class="text-muted mb-0">Report marketplace problems for review by the moderation team.</p>
+      </div>
+      <button class="btn btn-brand" type="button" data-bs-toggle="modal" data-bs-target="#complaintModal">
+        <i class="bi bi-plus-lg me-1"></i> New complaint
+      </button>
+    </div>
+  </div>
+</section>
+
+<div class="container py-4 py-lg-5">
+  <div class="row g-4">
+    <div class="col-lg-8">
+      <div id="complaintsList" aria-live="polite">
+        <div class="card-soft p-4 text-muted">Loading complaints…</div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="card-soft p-4 sticky-sidebar">
+        <h2 class="h5 mb-2"><i class="bi bi-shield-check me-2 text-brand"></i>What happens next?</h2>
+        <ol class="small text-muted ps-3 mb-3">
+          <li class="mb-2">Your complaint is recorded as <strong>open</strong>.</li>
+          <li class="mb-2">A moderator reviews the details and may request more information.</li>
+          <li class="mb-2">The status changes to <strong>in review</strong>, <strong>resolved</strong>, or <strong>rejected</strong>.</li>
+          <li>Staff responses appear on the complaint.</li>
+        </ol>
+        <p class="small text-muted mb-0">For urgent safety concerns, contact local emergency services first.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="complaintModal" tabindex="-1" aria-labelledby="complaintModalTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <form id="complaintForm" novalidate>
+        <div class="modal-header">
+          <h2 class="modal-title h5" id="complaintModalTitle">File a complaint</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="alert alert-danger d-none form-error" role="alert"></div>
+          <div class="mb-3">
+            <label class="form-label" for="complaintProvider">Related provider <span class="text-muted fw-normal">(optional)</span></label>
+            <select class="form-select" id="complaintProvider" name="provider_id">
+              <option value="">General complaint</option>
+            </select>
+            <div class="form-text">Choose the provider involved, if any.</div>
+            <div class="invalid-feedback js-error d-none"></div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="complaintSubject">Subject</label>
+            <input class="form-control" id="complaintSubject" name="subject" type="text" maxlength="180" required>
+            <div class="invalid-feedback js-error d-none"></div>
+          </div>
+          <div class="mb-0">
+            <label class="form-label" for="complaintMessage">What happened?</label>
+            <textarea class="form-control" id="complaintMessage" name="message" rows="6" maxlength="5000" required placeholder="Include dates, what was agreed, and what went wrong. Do not include passwords or financial account details."></textarea>
+            <div class="invalid-feedback js-error d-none"></div>
+          </div>
+        </div>
+        <div class="modal-footer border-0">
+          <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-brand">Submit complaint</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="/static/js/complaints.js"></script>
+{% endblock %}

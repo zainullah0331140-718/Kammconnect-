@@ -1,0 +1,18 @@
+<aside class="admin-sidebar">
+  <div class="px-2 pb-2 mb-2 border-bottom">
+    <span class="eyebrow mb-1">Staff area</span>
+    <h2 class="h6 mb-0">Admin panel</h2>
+  </div>
+  <ul class="nav flex-column">
+    <li><a class="nav-link {% if page == 'admin-dashboard' %}active{% endif %}" href="/admin"><i class="bi bi-speedometer2 me-2"></i>Overview</a></li>
+    <li><a class="nav-link {% if page == 'admin-users' %}active{% endif %}" href="/admin/users"><i class="bi bi-people me-2"></i>Users</a></li>
+    <li><a class="nav-link {% if page == 'admin-verification' %}active{% endif %}" href="/admin/verification"><i class="bi bi-patch-check me-2"></i>Verification</a></li>
+    <li><a class="nav-link {% if page == 'admin-categories' %}active{% endif %}" href="/admin/categories"><i class="bi bi-grid me-2"></i>Categories</a></li>
+    <li><a class="nav-link {% if page == 'admin-reviews' %}active{% endif %}" href="/admin/reviews"><i class="bi bi-star me-2"></i>Reviews</a></li>
+    <li><a class="nav-link {% if page == 'admin-complaints' %}active{% endif %}" href="/admin/complaints"><i class="bi bi-flag me-2"></i>Complaints</a></li>
+    <li><a class="nav-link {% if page == 'admin-advertisements' %}active{% endif %}" href="/admin/advertisements"><i class="bi bi-megaphone me-2"></i>Advertisements</a></li>
+    <li><a class="nav-link {% if page == 'admin-activity' %}active{% endif %}" href="/admin/activity"><i class="bi bi-activity me-2"></i>Activity log</a></li>
+    <li><hr class="my-2"></li>
+    <li><a class="nav-link" href="/"><i class="bi bi-box-arrow-up-right me-2"></i>View public site</a></li>
+  </ul>
+</aside>
