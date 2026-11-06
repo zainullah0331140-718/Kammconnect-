@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, Response, status
 from sqlalchemy.orm import Session
 
 from app.db.session import get_db
@@ -61,3 +61,20 @@ def get_complaint(
     if complaint.user_id != user.id and not user.is_admin:
         raise HTTPException(status_code=404, detail="Complaint not found")
     return complaint_out(complaint)
+
+
+@router.delete("/{complaint_id}", status_code=status.HTTP_204_NO_CONTENT)
+def delete_complaint(
+    complaint_id: int, user: CurrentUser, db: Session = Depends(get_db)
+) -> Response:
+    complaint = ComplaintRepository(db).get(complaint_id)
+    if complaint is None:
+        raise HTTPException(status_code=404, detail="Complaint not found")
+    if complaint.user_id != user.id:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="You can only delete your own complaints",
+        )
+    db.delete(complaint)
+    db.commit()
+    return Response(status_code=status.HTTP_204_NO_CONTENT)

@@ -437,6 +437,27 @@ class AdminService:
         self.db.flush()
         return complaint
 
+    def delete_complaint(
+        self, *, admin: User, complaint_id: int, ip_address: str | None
+    ) -> None:
+        complaint = self.complaints.get(complaint_id)
+        if complaint is None:
+            raise HTTPException(status_code=404, detail="Complaint not found")
+        self.audit.add(
+            actor_user_id=admin.id,
+            action="complaint.delete",
+            entity_type="complaint",
+            entity_id=complaint.id,
+            details={
+                "user_id": complaint.user_id,
+                "provider_id": complaint.provider_id,
+                "subject": complaint.subject,
+            },
+            ip_address=ip_address,
+        )
+        self.db.delete(complaint)
+        self.db.flush()
+
     def list_ads(self, *, status_filter: str | None, page: int, page_size: int):
         ads, total = self.ads.list_admin(status=status_filter, page=page, page_size=page_size)
         return [advertisement_out(ad).model_dump() for ad in ads], total
@@ -472,3 +493,17 @@ class AdminService:
             action=action, page=page, page_size=page_size
         )
         return [audit_out(log) for log in logs], total
+
+    def clear_audit_logs(
+        self, *, admin: User, ip_address: str | None
+    ) -> int:
+        deleted = self.audit.delete_all()
+        self.audit.add(
+            actor_user_id=admin.id,
+            action="audit.clear",
+            entity_type="audit_log",
+            details={"deleted": deleted},
+            ip_address=ip_address,
+        )
+        self.db.flush()
+        return deleted

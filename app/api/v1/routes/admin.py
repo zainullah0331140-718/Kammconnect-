@@ -310,6 +310,21 @@ def update_complaint(
     return complaint_out(complaint).model_dump()
 
 
+@router.delete("/complaints/{complaint_id}", status_code=status.HTTP_204_NO_CONTENT)
+def delete_complaint(
+    complaint_id: int,
+    request: Request,
+    admin: User = Depends(require_admin),
+    db: Session = Depends(get_db),
+) -> Response:
+    service = AdminService(db)
+    service.delete_complaint(
+        admin=admin, complaint_id=complaint_id, ip_address=get_client_ip(request)
+    )
+    db.commit()
+    return Response(status_code=status.HTTP_204_NO_CONTENT)
+
+
 @router.get("/advertisements", response_model=Page[AdvertisementOut])
 def list_advertisements(
     pagination: PaginationParams,
@@ -359,3 +374,16 @@ def list_audit_logs(
         action=action, page=pagination.page, page_size=pagination.page_size
     )
     return paginate(items, total, pagination.page, pagination.page_size)
+
+
+@router.delete("/audit-logs", status_code=status.HTTP_204_NO_CONTENT)
+def clear_audit_logs(
+    request: Request,
+    admin: User = Depends(require_admin),
+    db: Session = Depends(get_db),
+) -> Response:
+    AdminService(db).clear_audit_logs(
+        admin=admin, ip_address=get_client_ip(request)
+    )
+    db.commit()
+    return Response(status_code=status.HTTP_204_NO_CONTENT)

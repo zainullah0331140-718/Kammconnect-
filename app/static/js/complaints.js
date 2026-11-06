@@ -29,6 +29,11 @@
       </div>
       <p class="small text-muted mt-3 mb-2">${KC.escapeHtml(complaint.message)}</p>
       ${complaint.admin_response ? `<div class="p-3 bg-brand-soft rounded small"><strong><i class="bi bi-person-badge me-1"></i>Staff response:</strong> ${KC.escapeHtml(complaint.admin_response)}</div>` : ""}
+      <div class="d-flex justify-content-end mt-2">
+        <button class="btn btn-sm btn-outline-danger" type="button" data-delete-complaint="${Number(complaint.id)}">
+          <i class="bi bi-trash me-1"></i>Delete
+        </button>
+      </div>
     </article>`;
   }
 
@@ -45,8 +50,28 @@
         return;
       }
       list.innerHTML = complaints.map(complaintCard).join("");
+      list.querySelectorAll("[data-delete-complaint]").forEach((button) => {
+        button.addEventListener("click", () =>
+          removeComplaint(Number(button.dataset.deleteComplaint))
+        );
+      });
     } catch (error) {
       list.innerHTML = `<div class="alert alert-danger">${KC.escapeHtml(error.message)}</div>`;
+    }
+  }
+
+  async function removeComplaint(id) {
+    const confirmed = await KC.confirm(
+      "Delete this complaint? This cannot be undone.",
+      "Delete complaint"
+    );
+    if (!confirmed) return;
+    try {
+      await KC.del(`/complaints/${id}`);
+      KC.toast("Complaint deleted");
+      await load();
+    } catch (error) {
+      KC.toast(error.message, "error");
     }
   }
 

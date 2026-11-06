@@ -57,6 +57,7 @@
     "review.delete": "Review deleted",
     "complaint.update": "Complaint updated",
     "complaint.delete": "Complaint deleted",
+    "audit.clear": "Activity log cleared",
     "advertisement.moderate": "Advertisement moderation",
     "category.create": "Category created",
     "category.update": "Category updated",
@@ -723,7 +724,10 @@
                     </div>
                     <div class="small text-muted">${KC.escapeHtml(item.user_name)} · ${KC.escapeHtml(item.user_email)}${item.provider_name ? ` · ${KC.escapeHtml(item.provider_name)}` : ""} · ${KC.formatDateTime(item.created_at)}</div>
                   </div>
-                  <button class="btn btn-sm btn-outline-brand align-self-start" type="button" data-update-complaint="${Number(item.id)}">Update</button>
+                  <div class="d-flex gap-2 align-self-start">
+                    <button class="btn btn-sm btn-outline-brand" type="button" data-update-complaint="${Number(item.id)}">Update</button>
+                    <button class="btn btn-sm btn-outline-danger" type="button" data-delete-complaint="${Number(item.id)}">Delete</button>
+                  </div>
                 </div>
                 <p class="small text-muted mb-2 mt-3">${KC.escapeHtml(item.message)}</p>
                 ${item.admin_response ? `<div class="small p-3 bg-brand-soft rounded"><strong>Staff response:</strong> ${KC.escapeHtml(item.admin_response)}</div>` : ""}
@@ -738,8 +742,27 @@
       container.querySelectorAll("[data-update-complaint]").forEach((button) => {
         button.addEventListener("click", () => openComplaintUpdate(Number(button.dataset.updateComplaint)));
       });
+      container.querySelectorAll("[data-delete-complaint]").forEach((button) => {
+        button.addEventListener("click", () => deleteAdminComplaint(Number(button.dataset.deleteComplaint)));
+      });
     } catch (error) {
       container.innerHTML = `<div class="alert alert-danger">${KC.escapeHtml(error.message)}</div>`;
+    }
+  }
+
+  async function deleteAdminComplaint(id) {
+    const item = complaintItems.find((complaint) => complaint.id === id);
+    const confirmed = await KC.confirm(
+      `Delete complaint "${item ? item.subject : id}"? This cannot be undone.`,
+      "Delete complaint"
+    );
+    if (!confirmed) return;
+    try {
+      await KC.del(`/admin/complaints/${id}`);
+      KC.toast("Complaint deleted");
+      loadAdminComplaints();
+    } catch (error) {
+      KC.toast(error.message, "error");
     }
   }
 
@@ -915,6 +938,26 @@
     }
   }
 
+  async function clearActivityLog() {
+    const confirmed = await KC.confirm(
+      "Delete all activity log entries? A record of this clear action will remain.",
+      "Clear activity log"
+    );
+    if (!confirmed) return;
+    const button = document.getElementById("clearActivityLog");
+    KC.setBusy(button, true, "Clearing...");
+    try {
+      await KC.del("/admin/audit-logs");
+      KC.toast("Activity log cleared");
+      activityPage = 1;
+      await loadActivity();
+    } catch (error) {
+      KC.toast(error.message, "error");
+    } finally {
+      KC.setBusy(button, false);
+    }
+  }
+
   function bindFilters() {
     const userForm = document.getElementById("userFilterForm");
     if (userForm) {
@@ -993,6 +1036,8 @@
         activityPage = 1;
         loadActivity();
       });
+      const clearLog = document.getElementById("clearActivityLog");
+      if (clearLog) clearLog.addEventListener("click", clearActivityLog);
     }
   }
 

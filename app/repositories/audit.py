@@ -1,6 +1,6 @@
 import json
 
-from sqlalchemy import func, select
+from sqlalchemy import delete, func, select
 from sqlalchemy.orm import Session, selectinload
 
 from app.models.audit import AuditLog
@@ -47,3 +47,7 @@ class AuditRepository:
             self.db.scalars(stmt.offset((page - 1) * page_size).limit(page_size)).all()
         )
         return logs, total
+
+    def delete_all(self) -> int:
+        result = self.db.execute(delete(AuditLog))
+        return result.rowcount or 0
