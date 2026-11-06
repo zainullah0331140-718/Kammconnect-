@@ -1,4 +1,4 @@
-﻿from typing import Annotated
+from typing import Annotated
 
 from fastapi import Depends, HTTPException, Query, Request, status
 from fastapi.security import OAuth2PasswordBearer
@@ -89,7 +89,7 @@ def require_roles(*roles: str):
 
 
 require_customer = require_roles(UserRole.CUSTOMER.value)
-require_provider = require_roles(UserRole.PROVIDER.value)
+require_provider = require_roles(UserRole.PROVIDER.value, UserRole.ADMIN.value)
 require_admin = require_roles(UserRole.ADMIN.value)
 
 

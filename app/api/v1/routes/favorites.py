@@ -3,7 +3,7 @@ from sqlalchemy import func, select
 from sqlalchemy.orm import Session
 
 from app.db.session import get_db
-from app.dependencies.auth import require_customer
+from app.dependencies.auth import get_current_user
 from app.models.enums import ReviewStatus, VerificationStatus
 from app.models.review import Review
 from app.models.user import User
@@ -35,7 +35,7 @@ def _rating_map(db: Session, provider_ids: list[int]) -> dict[int, tuple[float, 
 
 @router.get("/me", response_model=list[ProviderSummary])
 def my_favorites(
-    user: User = Depends(require_customer), db: Session = Depends(get_db)
+    user: User = Depends(get_current_user), db: Session = Depends(get_db)
 ) -> list[ProviderSummary]:
     favorites = FavoriteRepository(db).list_by_customer(user.id)
     ratings = _rating_map(db, [favorite.provider_id for favorite in favorites])
@@ -53,7 +53,7 @@ def my_favorites(
 def add_favorite(
     provider_id: int,
     response: Response,
-    user: User = Depends(require_customer),
+    user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ) -> dict:
     providers = ProviderRepository(db)
@@ -73,7 +73,7 @@ def add_favorite(
 @router.delete("/{provider_id}", status_code=status.HTTP_204_NO_CONTENT)
 def remove_favorite(
     provider_id: int,
-    user: User = Depends(require_customer),
+    user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ) -> Response:
     repo = FavoriteRepository(db)
